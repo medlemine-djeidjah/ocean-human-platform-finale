@@ -1,0 +1,38 @@
+{
+  "humanSystems": [
+    {
+      "name": "circulatory",
+      "description": "The system that transports blood, nutrients, and oxygen throughout the body."
+    },
+    {
+      "name": "respiratory",
+      "description": "The system responsible for taking in oxygen and expelling carbon dioxide."
+    },
+    {
+      "name": "nervous",
+      "description": "The control center that processes information and coordinates body functions."
+    },
+    {
+      "name": "immune",
+      "description": "The defense system that protects against harmful substances and organisms."
+    }
+  ],
+  "oceanSystems": [
+    {
+      "name": "circulatory",
+      "description": "Ocean currents that distribute heat, nutrients, and marine life globally."
+    },
+    {
+      "name": "respiratory",
+      "description": "The ocean's gas exchange system with the atmosphere, vital for marine life."
+    },
+    {
+      "name": "nervous",
+      "description": "Complex networks of marine ecosystems and their interconnections."
+    },
+    {
+      "name": "immune",
+      "description": "Natural filtration and cleansing processes in marine environments."
+    }
+  ]
+}

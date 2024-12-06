@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ocean-Human Body Educational Platform</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.158.0/three.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-blue-50">
+    <!-- Navigation -->
+    <nav class="bg-blue-600 text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">Ocean Body Explorer</h1>
+            <button id="toggleView" class="bg-blue-500 px-4 py-2 rounded hover:bg-blue-700">
+                Switch View
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4">
+        <!-- Comparison Section -->
+        <div class="grid md:grid-cols-2 gap-4 mb-8">
+            <!-- Human Body Side -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-2xl font-bold mb-4 text-blue-800">Human Body</h2>
+                <div id="bodyContainer" class="aspect-square bg-gray-100 rounded-lg mb-4">
+                    <!-- Placeholder for 3D model or interactive diagram -->
+                    <img src="/api/placeholder/400/400" alt="Human Body Diagram" class="w-full h-full object-contain">
+                </div>
+                <div id="bodyInfo" class="space-y-2">
+                    <h3 class="text-xl font-semibold text-blue-700">Selected System: <span id="bodySystem">Circulatory System</span></h3>
+                    <p id="bodyDescription" class="text-gray-700">The heart pumps blood through vessels, delivering oxygen and nutrients throughout the body.</p>
+                </div>
+            </div>
+
+            <!-- Ocean Side -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-2xl font-bold mb-4 text-blue-800">Ocean</h2>
+                <div id="oceanContainer" class="aspect-square bg-gray-100 rounded-lg mb-4">
+                    <!-- Placeholder for ocean visualization -->
+                    <img src="/api/placeholder/400/400" alt="Ocean System Diagram" class="w-full h-full object-contain">
+                </div>
+                <div id="oceanInfo" class="space-y-2">
+                    <h3 class="text-xl font-semibold text-blue-700">Parallel System: <span id="oceanSystem">Thermohaline Circulation</span></h3>
+                    <p id="oceanDescription" class="text-gray-700">Ocean currents act like a global conveyor belt, moving water, heat, and nutrients around the planet.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Selector -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h3 class="text-xl font-bold mb-4 text-blue-800">Explore Systems</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <button onclick="updateSystem('circulatory')" class="bg-blue-100 hover:bg-blue-200 p-4 rounded-lg text-blue-800 font-medium">
+                    Circulatory System
+                </button>
+                <button onclick="updateSystem('respiratory')" class="bg-blue-100 hover:bg-blue-200 p-4 rounded-lg text-blue-800 font-medium">
+                    Respiratory System
+                </button>
+                <button onclick="updateSystem('immune')" class="bg-blue-100 hover:bg-blue-200 p-4 rounded-lg text-blue-800 font-medium">
+                    Immune System
+                </button>
+                <button onclick="updateSystem('temperature')" class="bg-blue-100 hover:bg-blue-200 p-4 rounded-lg text-blue-800 font-medium">
+                    Temperature Control
+                </button>
+            </div>
+        </div>
+
+        <!-- Interactive Facts -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-xl font-bold mb-4 text-blue-800">Did You Know?</h3>
+            <div id="factContainer" class="prose max-w-none">
+                <p class="text-gray-700">Just as your heart beats 100,000 times a day to circulate blood, the ocean's global conveyor belt moves over 100 million cubic meters of water per second!</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // System data
+        const systems = {
+            circulatory: {
+                body: {
+                    name: "Circulatory System",
+                    description: "The heart pumps blood through vessels, delivering oxygen and nutrients throughout the body."
+                },
+                ocean: {
+                    name: "Thermohaline Circulation",
+                    description: "Ocean currents act like a global conveyor belt, moving water, heat, and nutrients around the planet."
+                },
+                fact: "Just as your heart beats 100,000 times a day to circulate blood, the ocean's global conveyor belt moves over 100 million cubic meters of water per second!"
+            },
+            respiratory: {
+                body: {
+                    name: "Respiratory System",
+                    description: "The lungs exchange oxygen and carbon dioxide with the atmosphere through breathing."
+                },
+                ocean: {
+                    name: "Gas Exchange System",
+                    description: "The ocean surface exchanges gases with the atmosphere, absorbing CO2 and releasing oxygen."
+                },
+                fact: "Like our lungs, which process about 11,000 liters of air daily, the ocean absorbs about 25% of human-produced CO2 emissions!"
+            },
+            immune: {
+                body: {
+                    name: "Immune System",
+                    description: "White blood cells protect the body from harmful organisms and substances."
+                },
+                ocean: {
+                    name: "Self-Cleaning Mechanisms",
+                    description: "Natural ocean processes help filter and clean water through various biological and chemical processes."
+                },
+                fact: "Similar to how our immune system fights off infections, the ocean has natural mechanisms to break down pollutants, though these systems can become overwhelmed."
+            },
+            temperature: {
+                body: {
+                    name: "Temperature Control",
+                    description: "The body maintains a stable internal temperature through various mechanisms."
+                },
+                ocean: {
+                    name: "Climate Regulation",
+                    description: "The ocean helps regulate global climate by absorbing and distributing heat around the planet."
+                },
+                fact: "Just as your body maintains a temperature of about 37°C, the ocean helps maintain Earth's climate stability, though climate change is disrupting this balance."
+            }
+        };
+
+        // Update system information
+        function updateSystem(systemKey) {
+            const system = systems[systemKey];
+            document.getElementById('bodySystem').textContent = system.body.name;
+            document.getElementById('bodyDescription').textContent = system.body.description;
+            document.getElementById('oceanSystem').textContent = system.ocean.name;
+            document.getElementById('oceanDescription').textContent = system.ocean.description;
+            document.getElementById('factContainer').innerHTML = `<p class="text-gray-700">${system.fact}</p>`;
+        }
+
+        // Initialize with circulatory system
+        updateSystem('circulatory');
+    </script>
+</body>
+</html>
